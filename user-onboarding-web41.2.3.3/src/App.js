@@ -34,7 +34,7 @@ function App() {
 
   useEffect(() => {}, []); //Enable button if schema met
 
-  //////////RETURN//////////
+  //////////RETURN APP//////////
   return (
     <div>
       <header>

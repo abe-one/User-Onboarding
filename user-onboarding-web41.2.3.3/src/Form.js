@@ -9,6 +9,15 @@ export default function Form(props) {
     const relValue = type === "checkbox" ? checked : value;
     change(name, relValue);
   };
+
+  const onSubmit = (e) => {
+    e.target.preventDefault();
+    submit();
+  };
   /////////RETURN FORM//////////
-  return <>PLACEHOLDER</>;
+  return (
+    <form className="form-container" onSubmit={onSubmit}>
+      {/* Title, errors next to inputs, inputs */}
+    </form>
+  );
 }
