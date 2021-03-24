@@ -14,7 +14,7 @@ const initialErrorValues = {
   name: "",
   email: "",
   password: "",
-  termsOfServ: false,
+  termsOfService: false,
 };
 
 //////////MAIN FUNCTION//////////
@@ -30,7 +30,13 @@ function App() {
 
   const postNewUser = () => {};
 
-  const inputChange = () => {};
+  //////////EVENT HANDLERS//////////
+  const inputChange = (name, value) => {
+    setFormValues({
+      ...formValues,
+      [name]: value,
+    });
+  };
 
   const submitForm = () => {};
 

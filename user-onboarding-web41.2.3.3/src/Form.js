@@ -1,4 +1,6 @@
 import React from "react";
+// import * as YUP from "yup";
+// import schema from "./form-schema";
 
 export default function Form(props) {
   /////////DESTRUCTURING//////////
@@ -57,7 +59,7 @@ export default function Form(props) {
           I agree to submit rights to all my personal information in perpetuity
           across an unsecured connection.
           <input
-            name="termsofserv"
+            name="termsOfService"
             type="checkbox"
             checked={values.termsOfService}
             onChange={onChange}
