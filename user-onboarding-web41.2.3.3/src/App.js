@@ -1,16 +1,18 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
 import * as YUP from "yup";
+import schema from "./form-schema";
 import Form from "./Form";
+import axios from "axios";
 
 /////////INITIAL VALUES//////////
 const initialFormValues = {
-  name: "",
+  name: "hdiuh",
   email: "",
   password: "",
   termsOfService: "",
 };
-const initialErrorValues = {
+const initialFormErrors = {
   name: "",
   email: "",
   password: "",
@@ -21,14 +23,24 @@ const initialErrorValues = {
 function App() {
   //////////STATES//////////
   const [formValues, setFormValues] = useState(initialFormValues);
-  const [errorValues, setErrorValues] = useState(initialErrorValues);
+  const [formErrors, setFormErrors] = useState(initialFormErrors);
   const [users, setUsers] = useState([]);
   const [disabled, setDisabled] = useState(true);
 
   //////////HELPERS//////////
   const getUsers = () => {};
 
-  const postNewUser = () => {};
+  const postNewUser = (newUser) => {
+    axios
+      .post("https://reqres.in/api/users", newUser)
+      .then((res) => setUsers([...users, res.data]))
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(setFormValues(initialFormValues));
+  };
+
+  // postNewUser(initialFormValues);
 
   //////////EVENT HANDLERS//////////
   const inputChange = (name, value) => {
@@ -36,14 +48,20 @@ function App() {
       ...formValues,
       [name]: value,
     });
+    YUP.reach(schema, name)
+      .validate(value)
+      .then(() => setFormErrors({ ...formErrors, [name]: "" }))
+      .catch((err) => setFormErrors({ ...formErrors, [name]: err.errors[0] }));
   };
 
   const submitForm = () => {};
 
   //////////EFFECTS//////////
-  useEffect(() => getUsers(), []); //Initialize with whatever's on the database
+  useEffect(() => {}); //Initialize with whatever's on the database
 
-  useEffect(() => {}, []); //Enable button if schema met
+  useEffect(() => {
+    schema.isValid(formValues).then((valid) => setDisabled(!valid));
+  }, [formValues]); //Enable button if schema met
 
   //////////RETURN APP//////////
   return (
@@ -56,7 +74,7 @@ function App() {
         change={inputChange}
         submit={submitForm}
         disabled={disabled}
-        errors={errorValues}
+        errors={formErrors}
       />
       <div>
         <h3>Current User List</h3>

@@ -1,6 +1,4 @@
 import React from "react";
-// import * as YUP from "yup";
-// import schema from "./form-schema";
 
 export default function Form(props) {
   /////////DESTRUCTURING//////////
