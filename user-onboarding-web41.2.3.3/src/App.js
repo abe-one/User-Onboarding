@@ -4,12 +4,17 @@ import * as YUP from "yup";
 import Form from "./Form";
 
 /////////INITIAL VALUES//////////
-const initialFormValues = { name: "", email: "", password: "", termOfServ: "" };
+const initialFormValues = {
+  name: "",
+  email: "",
+  password: "",
+  termsOfService: "",
+};
 const initialErrorValues = {
   name: "",
   email: "",
   password: "",
-  termofserv: "",
+  termsOfServ: false,
 };
 
 //////////MAIN FUNCTION//////////
@@ -38,7 +43,7 @@ function App() {
   return (
     <div>
       <header>
-        <h1>Onboard Users</h1>
+        <h1>User Onboarding</h1>
       </header>
       <Form
         values={formValues}
