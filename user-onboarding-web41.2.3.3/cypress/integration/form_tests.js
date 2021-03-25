@@ -25,23 +25,22 @@ describe("User Onboarding App", () => {
     expect(2 + 2).to.not.equal(5);
   });
 
+  it("Forms initialize empty", () => {
+    nameInput().should("have.value", "");
+    emailInput().should("have.value", "");
+    passwordInput().should("have.value", "");
+    termsBoxInput().should("not.be.checked");
+  });
+
   it("Inputs accept input and update values", () => {
     nameInput()
-      .should("have.value", "")
       .type(testName) //Maybe worth a helper function to try multiple variations re special characters and spaces
       .should("have.value", testName);
 
-    emailInput()
-      .should("have.value", "")
-      .type(testEmail)
-      .should("have.value", testEmail);
+    emailInput().type(testEmail).should("have.value", testEmail);
 
-    passwordInput()
-      .should("have.value", "")
-      .type(testPassword)
-      .should("have.value", testPassword);
+    passwordInput().type(testPassword).should("have.value", testPassword);
 
-    termsBoxInput().should("not.be.checked");
     termsBoxInput().check();
     termsBoxInput().should("be.checked");
 
@@ -58,11 +57,3 @@ describe("User Onboarding App", () => {
     userList().contains("true");
   });
 });
-
-//  Get the Name input and type a name in it.
-//  Use an assertion to check if the text inputted contains the name you provided (Hint: use the .should assertion)
-//  Get the Email input and type an email address in it
-//  Get the password input and type a password in it
-//  Set up a test that will check to see if a user can check the terms of service box
-//  Check to see if a user can submit the form data
-//  Check for form validation if an input is left empty
