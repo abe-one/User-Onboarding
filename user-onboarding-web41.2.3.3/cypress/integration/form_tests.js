@@ -25,14 +25,25 @@ describe("User Onboarding App", () => {
     expect(2 + 2).to.not.equal(5);
   });
 
-  it("Forms initialize empty", () => {
+  it("Form initializes empty", () => {
     nameInput().should("have.value", "");
     emailInput().should("have.value", "");
     passwordInput().should("have.value", "");
     termsBoxInput().should("not.be.checked");
   });
 
-  it("Inputs accept input and update values", () => {
+  it("Form validates", () => {
+    nameInput().type("short");
+    cy.contains("must");
+    emailInput().type("short");
+    cy.contains("req");
+    passwordInput().type("short");
+    cy.contains("req");
+    termsBoxInput().click().click();
+    cy.contains("must");
+  });
+
+  it("Inputs accept input, submits, and renders new user", () => {
     nameInput()
       .type(testName) //Maybe worth a helper function to try multiple variations re special characters and spaces
       .should("have.value", testName);
