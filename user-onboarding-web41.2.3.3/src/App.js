@@ -10,7 +10,7 @@ const initialFormValues = {
   name: "",
   email: "",
   password: "",
-  termsOfService: true,
+  termsOfService: false,
 };
 const initialFormErrors = {
   name: "",
@@ -32,7 +32,7 @@ function App() {
   const postNewUser = (newUser) => {
     axios
       .post("https://reqres.in/api/users", newUser)
-      .then((res) => setUsers([res.data]))
+      .then((res) => setUsers([...users, res.data]))
       .catch((err) => {
         console.log(err);
       })
@@ -78,7 +78,9 @@ function App() {
       <div>
         <h3>Current User List</h3>
         <pre>
-          {users.length > 0 ? JSON.stringify(users[0]) : "No users here"}
+          {users.length > 0
+            ? users.map((user) => JSON.stringify(user))
+            : "No users yet"}
         </pre>
       </div>
     </div>
