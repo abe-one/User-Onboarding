@@ -7,16 +7,16 @@ import axios from "axios";
 
 /////////INITIAL VALUES//////////
 const initialFormValues = {
-  name: "hdiuh",
-  email: "",
-  password: "",
-  termsOfService: "",
+  name: "oaeuoau",
+  email: "e@e.e",
+  password: "aoueoeuo",
+  termsOfService: true,
 };
 const initialFormErrors = {
   name: "",
   email: "",
   password: "",
-  termsOfService: false,
+  termsOfService: "",
 };
 
 //////////MAIN FUNCTION//////////
@@ -28,19 +28,17 @@ function App() {
   const [disabled, setDisabled] = useState(true);
 
   //////////HELPERS//////////
-  const getUsers = () => {};
 
   const postNewUser = (newUser) => {
+    debugger;
     axios
       .post("https://reqres.in/api/users", newUser)
-      .then((res) => setUsers([...users, res.data]))
+      .then((res) => setUsers([res.data]))
       .catch((err) => {
         console.log(err);
       })
       .finally(setFormValues(initialFormValues));
   };
-
-  // postNewUser(initialFormValues);
 
   //////////EVENT HANDLERS//////////
   const inputChange = (name, value) => {
@@ -54,10 +52,12 @@ function App() {
       .catch((err) => setFormErrors({ ...formErrors, [name]: err.errors[0] }));
   };
 
-  const submitForm = () => {};
+  const submitForm = () => {
+    const newUser = { name: formValues.name };
+    postNewUser(newUser);
+  };
 
   //////////EFFECTS//////////
-  useEffect(() => {}); //Initialize with whatever's on the database
 
   useEffect(() => {
     schema.isValid(formValues).then((valid) => setDisabled(!valid));
@@ -78,6 +78,7 @@ function App() {
       />
       <div>
         <h3>Current User List</h3>
+        <>{users.length > 0 ? JSON.stringify(users[0]) : "No users here"}</>
       </div>
     </div>
   );

@@ -11,7 +11,7 @@ export default function Form(props) {
   };
 
   const onSubmit = (e) => {
-    e.target.preventDefault();
+    e.preventDefault();
     submit();
   };
   /////////RETURN FORM//////////
@@ -24,7 +24,7 @@ export default function Form(props) {
           <input
             name="name"
             type="text"
-            value={values.name}
+            value={values.name.trim()}
             onChange={onChange}
             placeholder="Name"
           />
@@ -36,7 +36,7 @@ export default function Form(props) {
           <input
             name="email"
             type="email"
-            value={values.email}
+            value={values.email.trim()}
             onChange={onChange}
             placeholder="jsmith@smiths.com"
           />
@@ -63,6 +63,7 @@ export default function Form(props) {
             onChange={onChange}
             placeholder="John Smith"
           />
+          <div className="error">{errors.termsOfService}</div>
         </label>
         <button className="submit-button" disabled={disabled}>
           Submit
