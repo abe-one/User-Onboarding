@@ -78,9 +78,9 @@ function App() {
       <div>
         <h3>Current User List</h3>
         <pre>
-          {users.length > 0
-            ? users.map((user) => JSON.stringify(user))
-            : "No users yet"}
+          {users.map((user) => {
+            return JSON.stringify(user, null, " ") + "\n";
+          })}
         </pre>
       </div>
     </div>
