@@ -7,9 +7,9 @@ import axios from "axios";
 
 /////////INITIAL VALUES//////////
 const initialFormValues = {
-  name: "oaeuoau",
-  email: "e@e.e",
-  password: "aoueoeuo",
+  name: "",
+  email: "",
+  password: "",
   termsOfService: true,
 };
 const initialFormErrors = {
@@ -30,7 +30,6 @@ function App() {
   //////////HELPERS//////////
 
   const postNewUser = (newUser) => {
-    debugger;
     axios
       .post("https://reqres.in/api/users", newUser)
       .then((res) => setUsers([res.data]))
@@ -78,7 +77,9 @@ function App() {
       />
       <div>
         <h3>Current User List</h3>
-        <>{users.length > 0 ? JSON.stringify(users[0]) : "No users here"}</>
+        <pre>
+          {users.length > 0 ? JSON.stringify(users[0]) : "No users here"}
+        </pre>
       </div>
     </div>
   );
