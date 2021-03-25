@@ -52,7 +52,12 @@ function App() {
   };
 
   const submitForm = () => {
-    const newUser = { name: formValues.name };
+    const newUser = {
+      name: formValues.name.trim(),
+      email: formValues.email.trim(),
+      password: formValues.password,
+      termsOfService: formValues.termsOfService,
+    };
     postNewUser(newUser);
   };
 

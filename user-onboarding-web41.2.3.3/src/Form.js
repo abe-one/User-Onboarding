@@ -24,7 +24,7 @@ export default function Form(props) {
           <input
             name="name"
             type="text"
-            value={values.name.trim()}
+            value={values.name}
             onChange={onChange}
             placeholder="Name"
           />
@@ -36,7 +36,7 @@ export default function Form(props) {
           <input
             name="email"
             type="email"
-            value={values.email.trim()}
+            value={values.email}
             onChange={onChange}
             placeholder="jsmith@smiths.com"
           />
