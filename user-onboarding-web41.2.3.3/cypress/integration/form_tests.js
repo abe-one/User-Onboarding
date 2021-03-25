@@ -12,7 +12,13 @@ describe("User Onboarding App", () => {
   const emailInput = () => cy.get('input[name="email"]');
   const passwordInput = () => cy.get('input[name="password"]');
   const termsBoxInput = () => cy.get('input[name="termsOfService"]');
-  const submitBtnInput = () => cy.get('button[class="submit-button');
+  const submitBtn = () => cy.get('button[class="submit-button');
+  const userList = () => cy.get("pre");
+
+  // Input Variables
+  const testName = "Fname Lname";
+  const testEmail = "Moddy@mod.mod";
+  const testPassword = "abc12badpwd";
 
   it("Sanity test", () => {
     expect(2 + 2).to.equal(4);
@@ -22,25 +28,35 @@ describe("User Onboarding App", () => {
   it("Inputs accept input and update values", () => {
     nameInput()
       .should("have.value", "")
-      .type("Fname Lname") //Maybe worth a helper function to try multiple variations re special characters and spaces
-      .should("have.value", "Fname Lname");
+      .type(testName) //Maybe worth a helper function to try multiple variations re special characters and spaces
+      .should("have.value", testName);
 
     emailInput()
       .should("have.value", "")
-      .type("Moddy@mod.mod")
-      .should("have.value", "Moddy@mod.mod");
+      .type(testEmail)
+      .should("have.value", testEmail);
 
     passwordInput()
       .should("have.value", "")
-      .type("abc12badpwd")
-      .should("have.value", "abc12badpwd");
+      .type(testPassword)
+      .should("have.value", testPassword);
 
     termsBoxInput().should("not.be.checked");
     termsBoxInput().check();
     termsBoxInput().should("be.checked");
-  });
 
-  // Submissions
+    // Submission
+    submitBtn().click();
+    nameInput().should("have.value", "");
+    emailInput().should("have.value", "");
+    passwordInput().should("have.value", "");
+    termsBoxInput().should("not.be.checked");
+
+    userList().contains(testName);
+    userList().contains(testEmail);
+    userList().contains(testPassword);
+    userList().contains("true");
+  });
 });
 
 //  Get the Name input and type a name in it.
